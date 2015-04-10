@@ -14,8 +14,13 @@ class AddPeople
     fill_in('Username', :with => CONFIG['username'])
     fill_in('Password', :with => CONFIG['password'])
     click_button('Log in')
-    false if !has_content?("People")
+    raise "Login failed" if !has_content?("People")
+  end
+
+  def navigate_to_people
+    login
+    visit "#{CONFIG['drupal_url']}/admin/people/people"
   end
 end
 
-AddPeople.new.login
+AddPeople.new.navigate_to_people
