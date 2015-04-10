@@ -1,6 +1,5 @@
 require 'capybara'
 require 'yaml'
-require 'pry'
 CONFIG = YAML.load_file("config.yml")
 
 class AddPeople
@@ -26,7 +25,6 @@ class AddPeople
   end
 
   def add_user(username, email, password, status, notify, roles)
-    navigate_to_add_user
     fill_in('Username', :with => username)
     fill_in('E-mail address', :with => email)
     fill_in('Password', :with => password)
@@ -39,6 +37,7 @@ class AddPeople
   end
 
   def add_users_from_csv(csv)
+    navigate_to_add_user
     csv = File.open(csv, "r")
     raise "people.csv not properly formatted" if csv.each_line.first != "username,email,password,status,notify,roles\n"
     csv.each_line do |line|
@@ -49,7 +48,6 @@ class AddPeople
       end
       line[4] = line[4].to_i
       line[5] = line[5].gsub("\n",'').gsub(/"/,'')
-      binding.pry
       add_user(line[0], line[1], line[2], line[3], line[4], line[5]) 
     end
     csv.close

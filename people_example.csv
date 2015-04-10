@@ -1,0 +1,2 @@
+username,email,password,status,notify,roles
+EXAMPLE USER,EXAMPLE@EMAIL.COM,EXAMPLEPW,Active,0,"roles, separated, by, commas"

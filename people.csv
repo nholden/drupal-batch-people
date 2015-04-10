@@ -1,1 +1,2 @@
 username,email,password,status,notify,roles
+test,test@test.com,test,Active,0,MOSTEC alum
